@@ -1,8 +1,11 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import HeaderContainer from './header/header_container';
 import SignupFormContainer from './session/signup_form_container';
 import LoginFormContainer from './session/login_form_container';
+import { AuthRoute, ProtectedRoute } from '../util/route_util';
+import { BenchIndex } from './bench/bench_index';
+
 
 
 const App = () => (
@@ -12,8 +15,11 @@ const App = () => (
       <HeaderContainer/>
     </div>
     <h1>MAIN SECTION</h1>
-    <Route exact path='/signup' component={SignupFormContainer}/>
-    <Route exact path='/login' component={LoginFormContainer}/>
+    <Switch>
+      <AuthRoute exact path='/signup' component={SignupFormContainer}/>
+      <AuthRoute exact path='/login' component={LoginFormContainer}/>
+      <ProtectedRoute path='/' component={BenchIndex}/>
+    </Switch>
   </div>
 )
 
